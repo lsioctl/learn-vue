@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, shallowReactive, shallowRef } from 'vue'
 import type { Ref } from 'vue'
 import SquareItem from './SquareItem.vue'
 
-const squareList = ref(Array(9).fill(null))
+// We do not need deep reactivity as the state is only the array
+// as a whole
+const squareList = shallowRef(Array(9).fill(null))
 const player = ref('X')
-
-console.log(squareList)
 
 function setNextPlayer() {
   if (player.value === 'X') {
@@ -18,7 +18,7 @@ function setNextPlayer() {
 
 function onSquareClicked(index: number) {
   console.log(squareList)
-  console.log(squareList.value[0])
+  console.log(squareList.value)
   //console.log(squareList.value[0].value)
   console.log('clicked')
   console.log(index)
@@ -26,14 +26,14 @@ function onSquareClicked(index: number) {
   const nextSquareList = squareList.value.slice()
 
   // set the correct value
-  nextSquareList[index] = player
+  // be wary to not do:
+  // nextSquareList[index] = player
+  // as it would store a Ref and not a value
+  nextSquareList[index] = player.value
+
+  console.log(nextSquareList)
 
   squareList.value = nextSquareList
-
-  console.log(squareList.value)
-
-  console.log(squareList.value[0])
-  console.log(squareList.value[0].value)
 
   setNextPlayer()
 }
@@ -42,7 +42,7 @@ function onSquareClicked(index: number) {
 <template>
   <div class="board">
     <div class="board_row">
-      <SquareItem :player="squareList[0]?.value" @click="() => onSquareClicked(0)" />
+      <SquareItem :player="squareList[0]" @click="() => onSquareClicked(0)" />
       <SquareItem :player="squareList[1]" @click="() => onSquareClicked(1)" />
       <SquareItem :player="squareList[2]" @click="() => onSquareClicked(2)" />
     </div>
