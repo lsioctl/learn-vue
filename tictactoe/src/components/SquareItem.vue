@@ -2,13 +2,13 @@
 import { ref } from 'vue'
 import type { Ref } from 'vue'
 
-function onSquareClicked() {
-  console.log('clicked')
-}
+defineProps({
+  player: String
+})
 </script>
 
 <template>
-  <div class="square" @click="onSquareClicked">X</div>
+  <div class="square">{{ player }}</div>
 </template>
 
 <style scoped>
