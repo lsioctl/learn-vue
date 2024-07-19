@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { Ref } from 'vue'
 
-defineProps({
-  player: String
-})
+// We use Type script types instead of runtime types
+defineProps<{
+  player: string | null
+}>()
 </script>
 
 <template>
