@@ -1,18 +1,25 @@
 # tictactoe
 
-This template should help get you started developing with Vue 3 in Vite.
+A homework rewritting my TicTacToe from React tutorial to Vue.
 
-## Recommended IDE Setup
+## Notes
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+This TicTacToe might look very different from others available on Internet,
+as I wanted to really follow React's (excellent) tutorial and having
+multiple components communicating together.
 
-## Type Support for `.vue` Imports in TS
+I used almost the same (two way) data flow as React:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- from parents to children: passing props
+- from children to parent: callbacks (passed as props from parents)
 
-## Customize configuration
+Here it is said it an anti pattern in Vue:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+https://www.bryanleetc.com/passing-functions-as-props-an-anti-pattern-in-vue-js/
+
+I think I understand where he gets from, but in this simple case it might be OK.
+
+Still have to test using event for data from children to parent though.
 
 ## Project Setup
 
